@@ -1,6 +1,6 @@
 {
-  "name": "brag",
-  "description": "Turn the current project into a short, polished, shareable launch video using HyperFrames, with an optional looping GIF for a README.",
+  "name": "gif",
+  "description": "Turn the current project into a looping GIF for your README using HyperFrames — with an optional launch film via --video.",
   "version": "0.5.0",
   "author": {
     "name": "Shunit Haviv Hakimi",
@@ -9,5 +9,5 @@
   "license": "MIT",
   "homepage": "https://github.com/Areej-ui-sehaan/gifMaker",
   "repository": "https://github.com/Areej-ui-sehaan/gifMaker",
-  "keywords": ["video", "launch", "hyperframes", "skill", "gif", "readme"]
+  "keywords": ["gif", "readme", "loop", "video", "launch", "hyperframes", "skill"]
 }

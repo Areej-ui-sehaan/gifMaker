@@ -1,6 +1,6 @@
 {
-  "name": "brag",
-  "description": "You built it. Now brag. Turn the project you just shipped into a short, shareable launch video — or a looping GIF for your README — with one command.",
+  "name": "gif",
+  "description": "You built it. Now put it in the README. Turn the project you just shipped into a looping GIF — or a full launch film — with one command.",
   "owner": {
     "name": "Shunit Haviv Hakimi",
     "email": "shunithaviv@gmail.com",
@@ -8,9 +8,9 @@
   },
   "plugins": [
     {
-      "name": "brag",
+      "name": "gif",
       "source": "./",
-      "description": "Turn the current project into a short, polished, shareable launch video using HyperFrames, with an optional README GIF."
+      "description": "Turn the current project into a looping README GIF using HyperFrames, with an optional launch film (--video)."
     }
   ]
 }

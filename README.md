@@ -1,56 +1,56 @@
-# /brag
+# /gif
 
-**You built it. Now brag.**
+**You built it. Now put it in the README.**
 
-[![the /brag launch site — you built it, now brag](docs/assets/hero.png)](https://latent-spaces.github.io/brag/)
+`/gif` is a Claude Code skill that turns the project you created into a **looping GIF for your README** — the product visibly doing its thing, silent, 6–10 seconds, under 2MB. One command, powered by [Hyperframes](https://hyperframes.heygen.com/).
 
-`/brag` is a Claude Code skill that turns the project you created into a short, shareable launch video — music, motion, and share copy included. One command, powered by [Hyperframes](https://hyperframes.heygen.com/).
+A screenshot flattens it. A launch video is the wrong shape for a docs page — nothing autoplays there, and nobody's scrolling a README to hear a soundtrack. A GIF is the only format a README actually plays, so that's what this ships.
 
-The looping video on the [launch site](https://latent-spaces.github.io/brag/) was made by `/brag` on this very repo. 
+[![the /gif launch site — you built it, now brag](docs/assets/hero.png)](https://latent-spaces.github.io/brag/)
 
-## New: `/brag-slim`
+## New: `/gif-slim`
 
-**The same /brag, rebuilt lean for Opus 5.5.**
+**The same /gif, rebuilt lean for Opus 5.5.**
 
-A smooth launch video, designed for your specific project, with its own soundtrack and share copy.
+A smooth, well-timed loop designed for your specific project — built entirely by the model, with its own share caption.
 
 No Hyperframes, no bundled assets, same creative rules.
 
-Just tell Opus 5.5: *let's /brag about this.*
+Just tell Opus 5.5: *let's /gif this.*
 
-On Opus 5.5, `/brag` switches to `/brag-slim` automatically. Run `/brag --full` to keep the classic Hyperframes workflow.
+On Opus 5.5, `/gif` switches to `/gif-slim` automatically. Run `/gif --full` to keep the classic Hyperframes workflow.
 
-**Install just `/brag-slim`:**
+**Install just `/gif-slim`:**
 
 ```bash
-npx skills add https://github.com/Areej-ui-sehaan/gifMaker --skill brag-slim
+npx skills add https://github.com/Areej-ui-sehaan/gifMaker --skill gif-slim
 ```
 
-Already have the `/brag` plugin? `/brag-slim` is included from version 0.4.0. Run `claude plugin update brag` to get it.
+Already have the `/gif` plugin? `/gif-slim` ships inside it. Run `claude plugin update gif` to get it.
 
-## Install /brag
+## Install /gif
 
 ```bash
 /plugin marketplace add Areej-ui-sehaan/gifMaker
-/plugin install brag@brag
+/plugin install gif@gif
 ```
 
-Then run `/brag` inside any project. The plugin includes `/brag-slim` too.
+Then run `/gif` inside any project. The plugin includes `/gif-slim` too.
 
 **Any other agent** — one command via the [`skills`](https://github.com/vercel-labs/skills) CLI (Cursor, Codex, Copilot, Gemini CLI, opencode, and more):
 
 ```bash
-npx skills add https://github.com/Areej-ui-sehaan/gifMaker --skill brag
+npx skills add https://github.com/Areej-ui-sehaan/gifMaker --skill gif
 ```
 
-Add `-g` to install globally (available in every project); drop it to scope to the current one. ([browse on skills.sh](https://www.skills.sh/Areej-ui-sehaan/gifMaker/brag))
+Add `-g` to install globally (available in every project); drop it to scope to the current one. ([browse on skills.sh](https://www.skills.sh/Areej-ui-sehaan/gifMaker/gif))
 
 <details>
 <summary>No installer? Copy the skill directly.</summary>
 
 ```bash
-rsync -a --exclude '.DS_Store' skills/brag/ ~/.claude/skills/brag/
-rsync -a --exclude '.DS_Store' skills/brag-slim/ ~/.claude/skills/brag-slim/  # optional: the /brag-slim command
+rsync -a --exclude '.DS_Store' skills/gif/ ~/.claude/skills/gif/
+rsync -a --exclude '.DS_Store' skills/gif-slim/ ~/.claude/skills/gif-slim/  # optional: the /gif-slim command
 ```
 
 Restart Claude Code after copying.
@@ -62,59 +62,79 @@ This repo exposes the skill at every agent's standard discovery path via symlink
 
 | Agent | How it discovers |
 |---|---|
-| **Google Antigravity** | Auto-detects from `.agents/skills/brag/` at project root or `~/.gemini/config/skills/brag/` globally |
-| **opencode** | Auto-detects from `.opencode/skills/brag/` at project root |
-| **Codex CLI** | Reads `.agents/skills/brag/`, walking up to repo root |
-| **Claude Code** | Also reads `.claude/skills/brag/` (in addition to the `.claude-plugin/` marketplace install above) |
-| **Other agents** | Point custom instructions at `skills/brag/SKILL.md` — see [`docs/other-agents.md`](docs/other-agents.md) |
+| **Google Antigravity** | Auto-detects from `.agents/skills/gif/` at project root or `~/.gemini/config/skills/gif/` globally |
+| **opencode** | Auto-detects from `.opencode/skills/gif/` at project root |
+| **Codex CLI** | Reads `.agents/skills/gif/`, walking up to repo root |
+| **Claude Code** | Also reads `.claude/skills/gif/` (in addition to the `.claude-plugin/` marketplace install above) |
+| **Other agents** | Point custom instructions at `skills/gif/SKILL.md` — see [`docs/other-agents.md`](docs/other-agents.md) |
 
-> **Windows users:** Git requires `git config core.symlinks true` (or `git clone -c core.symlinks=true`) and Windows Developer Mode or Administrator privileges to create symlinks. If symlinks don't work on your system, copy `skills/brag/` to the agent's skill directory manually instead.
+> **Windows users:** Git requires `git config core.symlinks true` (or `git clone -c core.symlinks=true`) and Windows Developer Mode or Administrator privileges to create symlinks. If symlinks don't work on your system, copy `skills/gif/` to the agent's skill directory manually instead.
 
 ## Use it
 
 From any project directory, ask your agent:
 
 ```text
-let's /brag
+let's /gif
 ```
 
-Or steer the tone:
+Or steer it:
 
 ```text
-/brag --tone "fake Series A launch from 2016"
+/gif --tone "fake Series A launch from 2016"
+/gif --duration 6 --width 560        # smaller than the 2MB default
+/gif --target-mb 1                   # for a GIF you're committing next to the README
 ```
 
-Need something for your README rather than for X? A launch video is the wrong shape there — a README wants a silent loop that autoplays. `--gif` gives you both:
+You get a `gif-output/` folder with the plan, a composition brief, the share caption, and `loop.gif` — the deliverable.
+
+Want the launch film too? `--video` adds the 15–25 second version with a music bed, SFX, a poster frame baked as frame 0, and `share-copy.txt`:
 
 ```text
-/brag --gif
+/gif --video
 ```
 
-You still get `brag.mp4`; you also get `brag.gif`, cut from the render — one beat, 6–10 seconds, ~640px, under a 2MB budget, shrinking itself until it fits. Then paste it in:
+Voiceover lives on that path only — a GIF has no track to carry it — and is still opt-in with `--voice`.
+
+### What lands in the README
 
 ```md
 <p align="center">
-  <a href="https://your-project.example" title="Watch the 20-second launch film">
-    <img src="docs/brag.gif" alt="The whole pipeline running on one click" width="640">
-  </a>
+  <img src="docs/loop.gif" alt="The whole pipeline running on one click" width="640">
 </p>
 ```
 
-Voiceover is off by default. Enable it explicitly with:
+The GIF arrives sized for that box. Budgets, from tightest to the legal limit:
 
-```text
-/brag --voice
-```
+| Target | Use |
+|---|---|
+| ≤ 1MB | committed in the repo next to the README — the default ambition |
+| ≤ 2MB | fine for a README, still fast on a bad connection (the default) |
+| ≤ 10MB | GitHub's ceiling for images and GIFs pasted into the editor |
 
-Narration uses Kokoro through Hyperframes when enabled.
+Measured against the example projects in this repo: 8s at 640px/12fps lands at **1.0MB**, 7s at 1.2MB, and a 20s high-motion clip that starts at 5.6MB walks itself down to 601KB.
 
-You get a `brag-output/` folder with the plan, a composition brief, share copy, the rendered `brag.mp4` — and, with `--gif`, the `brag.gif` built to sit in a README.
+### Why not just transcode a video?
+
+Because the things that make a loop good have to be decided before it renders:
+
+- **One beat, not a tour.** A README reader gives you one glance; length is what size tracks hardest.
+- **Hard cuts.** A crossfade is 2–3 frames at 12fps — it reads as a rendering glitch, not a transition.
+- **Type one step bigger.** Designed at 1920px, displayed at 640px.
+- **Flat backgrounds.** 256 colors on a slow dark gradient band visibly.
+- **A designed seam.** The last frame flows back into the first, and frame 0 is a settled still — that's what paints before the animation rolls.
+- **A real palette pass.** `palettegen`/`paletteuse` costs roughly double the bytes of a naive encode and is the difference between legible and mush.
 
 ## How it works
 
-`/brag` owns the story — the product angle, tone, and which moments to show. It hands a focused brief to [Hyperframes](https://hyperframes.heygen.com/), which builds, times, and renders the video.
+`/gif` owns the story — the product angle, tone, and which moment deserves to loop. It hands a focused brief to [Hyperframes](https://hyperframes.heygen.com/), which builds, times, and renders; then `skills/gif/scripts/make-gif.mjs` cuts the render down to the loop.
 
-The GIF isn't a downscaled video: a GIF gets one beat, no sound, 256 colors, and a loop you have to design for. `/brag --gif` plans that window before the render and cuts it out of the final file with `<skill-dir>/scripts/make-gif.mjs` (ffmpeg only; gifsicle, if installed, gets used for an extra lossy pass). On `/brag-slim` the same rules ship as a single ffmpeg line — no scripts, no bundled assets.
+`make-gif.mjs` is standalone and dependency-free (ffmpeg only — no ffprobe, no gifsicle, no npm packages) and encodes against a size budget it walks down by itself:
+
+```bash
+node skills/gif/scripts/make-gif.mjs work/launch.mp4 --out loop.gif --start 6 --duration 8
+# → done: 1.00MB  640x360  8s @ 12fps  ~96 frames  loops forever  no audio
+```
 
 ## Requirements
 
@@ -125,14 +145,12 @@ The GIF isn't a downscaled video: a GIF gets one beat, no sound, 256 colors, and
 
 ## What's in this repo
 
-- `skills/brag/` — the skill, references, bundled music + SFX, and `scripts/make-gif.mjs` for the README GIF
-- `skills/brag-slim/` — `/brag-slim`, the single-file skill for Claude Opus 5.5
+- `skills/gif/` — the skill, references, the `make-gif.mjs` GIF encoder, and bundled music + SFX (used only when `--video` renders the film)
+- `skills/gif-slim/` — `/gif-slim`, the single-file skill for Claude Opus 5.5
 - `examples/` — fake product sites used as a benchmark suite
-- `docs/` — the launch site (GitHub Pages)
+- `docs/` — the launch site (GitHub Pages), still showing the launch films
 - `.claude-plugin/` — plugin manifest + marketplace catalog
-- `.claude/skills/brag/` — symlink → `skills/brag/` (Claude Code discovery)
-- `.agents/skills/brag/` — symlink → `skills/brag/` (Codex CLI + opencode discovery)
-- `.opencode/skills/brag/` — symlink → `skills/brag/` (opencode discovery)
+- `.claude/skills/gif/`, `.agents/skills/gif/`, `.opencode/skills/gif/` — symlinks → `skills/gif/` (agent discovery)
 
 ## Credits
 
@@ -143,7 +161,11 @@ The GIF isn't a downscaled video: a GIF gets one beat, no sound, 256 colors, and
 
 ## Contributing
 
-Contributions, ideas, and new demo brags are welcome — open an issue or a PR.
+Contributions, ideas, and new demo loops are welcome — open an issue or a PR.
+
+## Rename note
+
+This project was `/brag` and made launch videos. `/gif` is the same engine with the priorities flipped: the GIF is the deliverable, the film is a flag. Upstream's credits, launch site, and Star History still point at [latent-spaces/brag](https://github.com/latent-spaces/brag) on purpose.
 
 ## Star History
 

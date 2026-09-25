@@ -1,7 +1,7 @@
 [project]
 name = "brag"
 version = "0.1.0"
-description = "Development tooling for the /brag skill."
+description = "Development tooling for the /gif skill (music cue analysis for --video)."
 requires-python = ">=3.11"
 dependencies = [
   "librosa>=0.10.2",

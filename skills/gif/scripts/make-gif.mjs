@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-// /brag — README GIF encoder.
+// /gif — README GIF encoder.
 //
-// Turns a rendered brag.mp4 into a looping GIF small enough to live in a
+// Cuts a rendered launch.mp4 down to the looping GIF that lives in a
 // project README. If the first encode is over the size budget it walks down a
 // quality ladder (width, then frame rate) until it fits. Needs ffmpeg on PATH
 // only — no ffprobe, no gifsicle, no dependencies. gifsicle, if present, is
@@ -17,7 +17,7 @@ import path from "node:path";
 
 const USAGE = `Usage: node make-gif.mjs <input.mp4> [options]
 
-  --out <path>       Output GIF. Default: brag.gif next to the input
+  --out <path>       Output GIF. Default: loop.gif next to the input
   --width <px>       Target width. Default: 640
   --fps <n>          Frames per second. Default: 12
   --start <s>        Trim start, in seconds. Default: 0
@@ -30,9 +30,9 @@ const USAGE = `Usage: node make-gif.mjs <input.mp4> [options]
   --dry-run          Print the commands, write nothing
 
 Examples:
-  node make-gif.mjs brag.mp4 --start 8 --duration 7      # hook + first highlight
-  node make-gif.mjs brag.mp4 --width 800 --target-mb 4   # bigger, looser budget
-  node make-gif.mjs brag.mp4 --out ../docs/brag.gif      # straight into the repo
+  node make-gif.mjs launch.mp4 --start 8 --duration 7    # hook + first highlight
+  node make-gif.mjs launch.mp4 --width 800 --target-mb 4 # bigger, looser budget
+  node make-gif.mjs launch.mp4 --out docs/loop.gif       # straight into the repo
 `;
 
 // Ladder rungs, best quality first. The walk only ever moves down this list,
@@ -139,13 +139,13 @@ if (!input) fail("No input video given. See: node make-gif.mjs --help");
 input = path.resolve(input);
 if (!existsSync(input)) fail(`No such file: ${input}`);
 
-const out = path.resolve(opts.out ?? path.join(path.dirname(input), "brag.gif"));
+const out = path.resolve(opts.out ?? path.join(path.dirname(input), "loop.gif"));
 if (out === input) fail("--out must differ from the input video.");
 
 const ffmpeg = process.env.FFMPEG || "ffmpeg";
 if (!run(ffmpeg, ["-version"]).ok) {
   fail(
-    `ffmpeg not found (tried "${ffmpeg}"). /brag needs FFmpeg on PATH:\n` +
+    `ffmpeg not found (tried "${ffmpeg}"). /gif needs FFmpeg on PATH:\n` +
       "  macOS: brew install ffmpeg     Debian/Ubuntu: sudo apt install ffmpeg\n" +
       "  Or point FFMPEG at a binary: FFMPEG=/path/to/ffmpeg node make-gif.mjs ...",
   );
@@ -221,7 +221,7 @@ console.log(
 console.log(`\npaste into README.md:\n\n  ![<one-line description of what's on screen>](${displayPath(out)})\n`);
 if (probe.hasAudio) {
   console.log(
-    `tip: this clip has a soundtrack the GIF drops — wrap the image in a link to ${path.basename(input)} (or wherever it's hosted) so the sound is one click away.`,
+    "tip: the source has a soundtrack that a GIF can't carry — re-run with --video to deliver the film alongside the loop, and link the image to it.",
   );
 }
 

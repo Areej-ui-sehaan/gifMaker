@@ -2,9 +2,9 @@
 """Generate music cue metadata (tempo, beat grid, strong cues) for any track.
 
 Used two ways: (1) a maintainer tool to precompute the bundled-track cue
-presets, and (2) an optional runtime "extended" beat-sync path for /brag on
+presets, and (2) an optional runtime "extended" beat-sync path for /gif's --video path on
 any track when Python + librosa are available (see references/audio.md ->
-"Beat and cue sources"). When those deps are absent, /brag falls back to
+"Beat and cue sources"). When those deps are absent, /gif falls back to
 `npx hyperframes beats`. Takes any audio file as input.
 """
 
@@ -280,7 +280,7 @@ def analyze_track(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Analyze a bundled music track and write /brag cue presets."
+        description="Analyze a bundled music track and write /gif --video cue presets."
     )
     parser.add_argument("input", type=Path, help="Input audio file.")
     parser.add_argument("--output-json", type=Path, required=True)
