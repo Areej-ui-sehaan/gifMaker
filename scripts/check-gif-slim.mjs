@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-// /brag bundles a copy of /brag-slim (skills/brag/slim.md) so its Opus 5.5 hand-off
-// works no matter how /brag was installed. The two files must stay identical.
+// /gif bundles a copy of /gif-slim (skills/gif/slim.md) so its Opus 5.5 hand-off
+// works no matter how /gif was installed. The two files must stay identical.
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const source = "skills/brag-slim/SKILL.md";
-const copy = "skills/brag/slim.md";
+const source = "skills/gif-slim/SKILL.md";
+const copy = "skills/gif/slim.md";
 
 const [a, b] = await Promise.all([source, copy].map((p) => readFile(path.join(root, p), "utf8")));
 

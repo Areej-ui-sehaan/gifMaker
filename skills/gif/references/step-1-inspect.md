@@ -1,6 +1,6 @@
 # Step 1: Inspect the project
 
-Read the project directory to understand what you're bragging about.
+Read the project directory to understand what you're making a loop of.
 
 ## What to look for
 
@@ -8,7 +8,7 @@ Read these in priority order:
 
 1. **`index.html`** — the primary source. Read the full file. Extract: page title, hero headline, tagline, all section headings, CTA text, testimonial copy, nav items. This is the voice and story of the app.
 
-2. **`styles.css`** or equivalent — extract: primary color palette (look for CSS custom properties / `:root` vars), font families, background colors, accent colors. These become the visual identity of the brag video.
+2. **`styles.css`** or equivalent — extract: primary color palette (look for CSS custom properties / `:root` vars), font families, background colors, accent colors. These become the visual identity of the loop.
 
 3. **`README.md`** — if present, extract: project name, one-line description, any listed features.
 
@@ -16,7 +16,7 @@ Read these in priority order:
 
 5. **Subdirectory files** — if this is a multi-page app, scan route files, component files, or page files. Extract key feature names and screen descriptions.
 
-6. **The user flow / happy path** — scan beyond marketing pages. The brag's strongest material is usually the product *in use*, not the product's marketing of itself. Look at:
+6. **The user flow / happy path** — scan beyond marketing pages. The GIF's strongest material is the product *in use*, not the product's marketing of itself. Look at:
    - **Routes** (`app/`, `pages/`, route files) — the screens beyond the landing page.
    - **Key feature components** — the upload form, the editor, the result view, the dashboard.
    - **State machines, stores, or step components** — how a session progresses.
@@ -42,11 +42,17 @@ After reading, answer all nine. Write these down before moving to Step 2.
    The strongest CSS visual: a color palette moment, a UI element, a diagram, a card.
 
 4. What should be shown from the actual UI?
-   Which section of the site has the most video-worthy content?
-   (Hero? Feature section? Testimonial? The UI mockup?)
+   Which section of the site has the most loop-worthy content?
+   (Hero? Feature section? The UI mockup? The working flow?)
 
-5. What is the shortest satisfying video?
-   Would 15 seconds work? 20? What's the minimum to land the joke/claim?
+5. Which one beat carries the loop?
+   The GIF is 6-10 seconds: hook plus one thing the product does. Pick the
+   beat that reads silently, in one pass, at 640px — and name roughly where it
+   starts and settles. Anything that only works with a sting or narration is
+   the wrong beat. With --video, this becomes "what's the shortest satisfying
+   film?" (15s? 20?) and the extra beats come from Q9.
+
+   (Audio direction is decided in Step 2, and only exists with --video.)
 
 6. What tone fits best?
    If the user specified a preset, use it.
@@ -59,16 +65,18 @@ After reading, answer all nine. Write these down before moving to Step 2.
    - Earnest product → preset: polished; direction: quiet premium product film
    - Chaotic product → preset: chaotic; direction: overproduced social ad
 
-7. What should the audio feel like?
-   Decide the audio role and music direction before picking exact SFX files.
-   Bias toward a polished audio layer: include music and tasteful SFX unless
-   the user disabled them, assets are missing, or silence is clearly the
-   strongest creative choice.
-   Examples:
-   - Warm corporate bed; SFX chosen later to match real UI motion
-   - Low music bed with final fade; one dry logo hit if the composition supports it
-   - Dense chaotic music; Hyperframes may align text/card reveals to beats
-   - Cinematic bed with a low swell, restrained motion-matched accents, and subtle audio-reactive glow/presence if it supports the visual style
+7. How does the loop get back to where it started?
+   A GIF replays with no pause, so the seam is part of the design. Name the
+   motion that can carry the last frame into the first — a cursor returning, a
+   card sliding off the same edge it came from, a counter resetting. If the only
+   available ending is a hard cut to black, say so: the plan then ends the
+   window before it.
+
+   Tone (Q6) decides pacing and transition style; in a 6-10 second loop pick it
+   by how the loop should feel, not by how long it can talk. With --video, also
+   decide the audio role here — bias toward a polished layer, music plus
+   tasteful SFX, unless the user disabled them, assets are missing, or silence
+   is the strongest choice (see audio.md).
 
 8. What should the share caption say?
    Draft one sentence. This becomes share-copy.txt.
@@ -129,5 +137,5 @@ Don't read:
 
 ## Rule: nothing secret leaves this step
 
-Everything read in this step can end up on screen in a video the user posts publicly. Never carry secrets, API keys, tokens, internal hostnames or URLs, real customer or user names, email addresses, or any personal data into `brag-plan.md`, `composition-brief.md`, the composition, the rendered video, or share copy. If the product's real UI contains such data, substitute plausible fictional stand-ins and say so in the plan.
+Everything read in this step can end up on screen in a GIF pasted into a public README. Never carry secrets, API keys, tokens, internal hostnames or URLs, real customer or user names, email addresses, or any personal data into `gif-plan.md`, `composition-brief.md`, the composition, the rendered film, the GIF, or share copy. If the product's real UI contains such data, substitute plausible fictional stand-ins and say so in the plan.
 

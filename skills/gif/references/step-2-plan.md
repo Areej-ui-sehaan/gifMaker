@@ -1,8 +1,8 @@
-# Step 2: Write the brag plan
+# Step 2: Write the gif plan
 
-Write `<output-dir>/brag-plan.md`. One focused page. This is the creative north star for the entire video.
+Write `<output-dir>/gif-plan.md`. One focused page. This is the creative north star for the entire loop.
 
-The plan should specify what the video must communicate and what project material must be used. It should not prescribe low-level Hyperframes implementation details. Hyperframes will decide the concrete composition structure, animation mechanics, and render workflow from the brief in Step 3.
+The plan should specify what the GIF must communicate and what project material must be used. Assume a GIF-only run: the audio sections below are scaffolding for `--video` and get skipped when it isn't set — but the loop window is never optional. It should not prescribe low-level Hyperframes implementation details. Hyperframes will decide the concrete composition structure, animation mechanics, and render workflow from the brief in Step 3.
 
 ## Create the output directory
 
@@ -10,10 +10,10 @@ The plan should specify what the video must communicate and what project materia
 mkdir -p <output-dir>
 ```
 
-## Structure of brag-plan.md
+## Structure of gif-plan.md
 
 ```markdown
-# Brag Plan: [App Name]
+# GIF Plan: [App Name]
 
 ## What is this app?
 [One sentence. What it does, what makes it funny or impressive.]
@@ -46,7 +46,8 @@ landing-page-only, write "none — landing-page only" and rely on Key moments in
 - Interpretation: [one sentence on how this affects pacing, writing, visual energy, and restraint]
 
 ## Format: [landscape / vertical / square] — [width]x[height]
-## Duration: [target seconds]
+## Duration: [6-10 seconds · 15-25 with --video]
+## Loop window: [start]s–[end]s · settles into [what the last frame flows back into] · target [2]MB
 
 ## Visual identity (from the project)
 - Background: [exact color value]
@@ -59,7 +60,10 @@ landing-page-only, write "none — landing-page only" and rely on Key moments in
 ## Share copy (draft)
 [One sentence for Twitter/X/LinkedIn/Discord. Punchy. Not corporate.]
 
-## Audio direction
+## Audio direction — only with `--video`
+
+A GIF has no soundtrack, so on a GIF-only run drop this whole section and every `Audio*` / `Music*` line below. Keep them when `--video` is set, because the film's scenes still need scoring.
+
 - Role: [warm bed / sparse professional accents / cinematic support / dense rhythmic layer / intentional silence]
 - Music: [candidate track / mood / none only if disabled, missing, or intentionally silent]
 - Music treatment: [start time, volume posture, fade-in/out intent, beat/swell notes]
@@ -70,6 +74,8 @@ landing-page-only, write "none — landing-page only" and rely on Key moments in
 - Restraint rule: [what audio must not do]
 
 ## Storyboard
+
+Scenes are the run's spine: on a GIF-only plan, storyboard only what lands inside the loop window (2-3 beats is plenty). `Audio intent`, `Audio-coupled idea`, `Music`, and the two bolded summary lines below are `--video` lines — write them when the flag is set, omit them when it isn't.
 
 ### Scene 1 — [name] — [duration]s
 [What's on screen. What text appears. What product material must be referenced.]
@@ -88,7 +94,7 @@ Transition mood: [mood] → Scene 3
 
 [... continue for all scenes]
 
-**Music mood for this video:** [upbeat / cinematic / chaotic / deadpan / parody / none only if disabled / missing / intentionally silent]
+**Music mood for this film:** [upbeat / cinematic / chaotic / deadpan / parody / none only if disabled / missing / intentionally silent]
 **Audio summary:** [one sentence describing the full audio arc]
 ```
 
@@ -113,11 +119,19 @@ But adapt it. These are the right scene counts for each tone:
 
 ## Duration guidance
 
-Scene durations must sum to 15-25 seconds. Count them.
+The loop is 6-10 seconds and has to fit its size budget. Count the durations inside the window — that's the number that matters on a GIF-only run.
 
-- Under 15 seconds: too thin, add a scene or lengthen holds.
-- Over 25 seconds: cut a scene or tighten timing.
-- 18-22 seconds is the sweet spot for most brag videos.
+With `--video`, film scenes sum to 15-25 seconds: under 15 is too thin, over 25 means cut a scene or tighten timing, and 18-22 is the sweet spot.
+
+## The loop window
+
+The GIF is the deliverable, and it's decided here — not salvaged after the render. The film, if requested, stays 15-25 seconds; the loop is a 6-10 second window cut out of it. Plan the window while you can still shape the edit around it:
+
+- **Choose the window** — the hook plus the one moment the product actually does its thing. A scene that only works with sound (a music sting, a voiceover beat) can't carry a GIF; pick a scene that reads silently.
+- **Design the return.** End the window on motion that flows into the first frame, so the loop looks intended. If the storyboard ends on an outro card with a hard fade to black, that fade is the loop's worst moment — leave it out of the window.
+- **No dissolves inside the window.** At GIF frame rates a crossfade is 2-3 frames and reads as a glitch. Cuts only.
+- **Keep type big.** The GIF lands at 640px wide, so anything you want read must survive that.
+- **Flatten the backdrop** where the loop spends most of its time — a slow dark gradient bands badly at 256 colors.
 
 ## Reading time (keep the pace, not at text's expense)
 
@@ -135,7 +149,7 @@ Two failure modes to design out at the plan stage:
 
 ## Choosing what to show
 
-Every brag video must show something real from the product. Options, in preferred order:
+Every launch video must show something real from the product. Options, in preferred order:
 
 1. **Recreate a working-app moment** — the upload screen, the result view, the dashboard with real-looking content. Use real source from `app/`, `pages/`, or routed components — not just the landing page. This is the most compelling option whenever the product has a flow. The product *doing* its thing beats the product *describing* its thing.
 2. **Recreate a UI element in HTML** — a hero card, swipe UI, progress meter, stat block. Strong when there is no flow to show.
@@ -165,7 +179,7 @@ If the project has no app (landing-page-only static site), skip this section and
 
 Before writing the storyboard, ask: **does this product have things that can appear one by one, or actions that can be simulated?**
 
-These are among the most effective moments in a brag video — they make the product feel alive and real, not like a slide deck. Look for:
+These are among the most effective moments in a launch video — they make the product feel alive and real, not like a slide deck. Look for:
 
 - **Sequential reveals** — feature cards, stats, list items, match results, profile cards, menu options, or anything the product shows as a set. Design these to appear one by one so sound and motion reinforce each arrival. This is a storyboard decision, not an audio afterthought.
 - **Simulated interaction** — if the product involves swiping, clicking, typing, selecting, or toggling, show it. A cursor clicking a button, a swipe gesture on a card, or text being typed into a field turns a static mockup into a demonstration. Sound matches the action automatically when the gesture is in the storyboard.
@@ -178,7 +192,7 @@ If a scene has either of these, commit to it explicitly in the scene description
 
 Hyperframes can implement both patterns well — but only if the plan specifies what's appearing, in what order, and that interaction is being simulated. The plan is the contract.
 
-## Audio planning
+## Audio planning — only with `--video`
 
 Choose the music direction in the plan. Leave exact SFX file selection and exact timestamps to Hyperframes during composition, because SFX should match the actual visual implementation.
 
@@ -190,15 +204,15 @@ Format: `Audio-coupled idea: type the hook with subtle key ticks if Hyperframes 
 
 For audio-reactive visuals, say what should respond and how restrained it should be. Example: `Audio-reactive treatment: subtle; use music RMS/bass to make the hero glow and product card presence breathe, not to add waveform bars.`
 
-Do not require exact SFX filenames in `brag-plan.md` unless the user explicitly requested a specific sound or the mapping is unavoidable. Prefer moment types and intent.
+Do not require exact SFX filenames in `gif-plan.md` unless the user explicitly requested a specific sound or the mapping is unavoidable. Prefer moment types and intent.
 
 Hyperframes has creative freedom to choose exact files, density, and timestamps that make the video feel smooth and professional.
 
 Do not over-specify audio if the tone asks for restraint. For `yc-parody` or `deadpan`, use fewer and quieter cues, but prefer polished restraint over no audio.
 
-## Music cue guidance
+## Music cue guidance — only with `--video`
 
-Beat/cue sync is available for any track now (see `audio.md` → "Beat and cue sources"): bundled tracks have precomputed presets; custom tracks get cues at composition time via `analyze_music_cues.py` (rich, needs Python) or `npx hyperframes beats` (simple, zero-dep). When the plan chooses music, add a compact `Music cue guidance` section to `brag-plan.md`:
+Beat/cue sync is available for any track now (see `audio.md` → "Beat and cue sources"): bundled tracks have precomputed presets; custom tracks get cues at composition time via `analyze_music_cues.py` (rich, needs Python) or `npx hyperframes beats` (simple, zero-dep). When the plan chooses music, add a compact `Music cue guidance` section to `gif-plan.md` (with `--video` only):
 
 - The track and, if a preset exists, its tempo.
 - 1-3 strong-cue timestamps to target for major visual moments — from the preset if bundled, otherwise note "to be detected at composition time."

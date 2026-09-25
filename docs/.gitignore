@@ -6,6 +6,7 @@ examples/*
 !examples/taxi-for-taxis/
 
 # Heavy HyperFrames composition/render sources — never committed
+gif-output*/
 brag-output*/
 
 .DS_Store

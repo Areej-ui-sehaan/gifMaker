@@ -17,6 +17,8 @@ skills-lock.json
 .claude/
 
 # HyperFrames render artifacts + heavy composition sources (never committed)
+**/gif-output*/
+# legacy name, for output dirs left around by pre-rename runs
 **/brag-output*/
 **/renders/
 **/.thumbnails/

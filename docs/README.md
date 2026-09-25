@@ -25,6 +25,8 @@ The gallery videos ship committed: each demo shown (`examples/horse-tinder/`, `e
 
 ## Adding / updating a gallery example
 
+Gallery assets keep their committed names (`brag.mp4`, `brag.jpg`, `site.jpg`) even though the skill now writes `launch.mp4` / `poster.jpg` / `loop.gif`: `check-docs.mjs` and the markup here resolve against those paths. Don't rename them with the skill.
+
 1. Render the brag video and place `brag.mp4`, `brag.jpg` (poster), and `site.jpg` (thumbnail) under `examples/<slug>/`, next to the demo's `index.html` and `styles.css`. Pick `brag.jpg` as the **best** frame, not an arbitrary one — grab the video's strongest settled beat (the hook line, or the hero/logo reveal) full-res with ffmpeg, then bake it as the video's frame 0 so idle thumbnails everywhere show it:
 
    ```bash

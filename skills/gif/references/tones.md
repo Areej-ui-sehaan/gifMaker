@@ -2,6 +2,23 @@
 
 Seven tones. Each changes scripting energy, pacing, typography personality, and transition style.
 
+## In a loop (the default)
+
+The per-tone pacing below is written for `--video`. A 6-10 second GIF can't hold 4-5 scenes, so read those numbers as *energy* and use this shape instead:
+
+| Tone | Beats in the loop | Transition |
+|---|---|---|
+| `default` | 2-3 | Clean cuts, quick settle |
+| `polished` | 1-2 | Cuts through the background, unhurried |
+| `yc-parody` | 2-3, one claim each | Hard cuts, dead straight |
+| `chaotic` | 4-5, some under 1.5s | Flash and zoom cuts |
+| `deadpan` | 1-2, big empty space | Slow, deliberate cuts |
+| `cinematic` | 2-3, big type | Dramatic wipes |
+| `app-store` | 2-4 | Smooth slides |
+
+Whatever the tone: no dissolve inside the window (2-3 frames at 12fps reads as a glitch), and the last frame has to flow back into the first.
+
+
 ---
 
 ## `default`

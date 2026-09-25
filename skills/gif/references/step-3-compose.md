@@ -8,13 +8,15 @@ Write `<output-dir>/composition-brief.md` before creating or editing the Hyperfr
 # Hyperframes Composition Brief: [App Name]
 
 ## Objective
-Create a short launch-style brag video for [App Name].
+Create a looping GIF for [App Name] — the product visibly doing its thing, readable at 640px, silent. With `--video`, also a short launch film.
 
 ## Output
 - Composition directory: `<output-dir>/composition/`
-- Rendered video: `<output-dir>/brag.mp4`
+- Render (source of every deliverable): `<output-dir>/work/launch.mp4`
+- GIF — the deliverable: `<output-dir>/loop.gif`, cut from that render — see `step-4-deliver.md`
+- With `--video`: `<output-dir>/launch.mp4` plus `<output-dir>/poster.jpg`
 - Format: [landscape / vertical / square] — [width]x[height]
-- Duration: [15-25 seconds]
+- Duration: [6-10 seconds for the loop · 15-25 for the film]
 
 ## Source Material
 - Project root: [path]
@@ -30,13 +32,20 @@ Create a short launch-style brag video for [App Name].
 - Tone preset: [default / polished / yc-parody / chaotic / deadpan / cinematic / app-store]
 - Creative direction: [freeform phrase, inferred or user-provided]
 - Interpretation: [how tone affects pacing, writing, visual energy, and restraint]
-- Angle: [one paragraph from brag-plan.md]
+- Angle: [one paragraph from gif-plan.md]
 - Hook: [first 2-3 seconds]
 - Outro / punchline: [final line]
 - Avoid:
   - Generic SaaS language
   - Abstract filler visuals
   - Unrelated visual redesign
+
+## GIF constraints (always in force)
+- Hard cuts between beats — no crossfades inside the loop window; at 12fps a dissolve reads as a rendering glitch.
+- Type sized to survive 640px: the largest type the layout allows, not the most elegant.
+- Flat or textured backgrounds over big soft gradients — 256 colors band on a slow ramp.
+- Contrast above the WCAG floor with margin to spare; the palette pass costs the softer pairs first.
+- The window ends on motion that returns to its first frame, and no fade to black inside it.
 
 ## Visual Identity
 - Background: [exact value from project]
@@ -47,14 +56,16 @@ Create a short launch-style brag video for [App Name].
 - Visual references from the project: [short list]
 
 ## Storyboard
-Use the storyboard in `<output-dir>/brag-plan.md` as the creative contract.
+Use the storyboard in `<output-dir>/gif-plan.md` as the creative contract.
 
 Scene summary:
 1. [Scene name] — [duration]s — [what must be seen / read]
 2. [Scene name] — [duration]s — [what must be seen / read]
 3. [...]
 
-## Audio
+## Audio — only with `--video`
+
+Omit this block from the brief on a GIF-only run: there is no track to score. Everything below it (`Audio asset preparation`, `Voiceover`, `Audio-reactive extraction`, `Beat sync`) is `--video` scaffolding for the same reason.
 - Audio role: [warm bed / sparse professional accents / cinematic support / dense rhythmic layer / intentional silence]
 - Audio arc: [how sound changes across the video]
 - Music: [filename, or none only if disabled, missing, or intentionally silent]
@@ -70,28 +81,28 @@ Scene summary:
 - Audio files: copy the chosen music and any Hyperframes-selected SFX into `<output-dir>/composition/assets/`
 
 ## Hyperframes Instructions
-Load the composition-building Hyperframes domain skills — `hyperframes-core` (composition contract + `data-*` timing), `hyperframes-animation` (motion), `hyperframes-creative` (design spec, beats, audio-reactive), `hyperframes-keyframes` (seek-safe keyframes), and `hyperframes-cli` (lint/check/render). /brag is its own workflow: do not enter the `hyperframes` entry-point intent interview and do not route into its generic promo / launch-video workflow. Prefer native Hyperframes conventions over anything in `/brag`.
+Load the composition-building Hyperframes domain skills — `hyperframes-core` (composition contract + `data-*` timing), `hyperframes-animation` (motion), `hyperframes-creative` (design spec, beats, audio-reactive), `hyperframes-keyframes` (seek-safe keyframes), and `hyperframes-cli` (lint/check/render). /gif is its own workflow: do not enter the `hyperframes` entry-point intent interview and do not route into its generic promo / launch-video workflow. Prefer native Hyperframes conventions over anything in `/gif`.
 
 Requirements:
 - Show at least one real UI, copy, or visual element from the source project.
 - Keep all text readable in the final render.
 - Keep the video within 15-25 seconds.
 - Include the planned music/SFX layer unless audio was explicitly disabled or documented as intentionally silent.
-- Treat `/brag` audio notes as guidance, not a fixed cue sheet. Choose SFX after the visual animation exists.
+- Treat `/gif` audio notes as guidance, not a fixed cue sheet. Choose SFX after the visual animation exists.
 - Treat music cue metadata as optional timing hints. Hyperframes decides exact animation timing and should ignore cues that hurt readability, scene pacing, or the product story.
 - Major reveals may move toward nearby strong cues within about 0.15s. Smaller entrances may align to nearby beat points within about 0.10s. Use only 1-3 strong cue locks in a 15-25s video unless the edit clearly benefits from more.
 - Use SFX to support motion and interaction: card sounds for card-like reveals, short announcement cues for major payoffs, key/click sounds for text or user actions, and restraint when the edit is already busy.
 - Honor planned music treatment such as fade-outs, ducking, beat-aligned reveals, or letting a final SFX ring over the music, using the best Hyperframes-supported implementation.
 - When music is present and the treatment is not `none`, consider Hyperframes audio-reactive workflow: extract audio data and use RMS/frequency bands for subtle, brand-specific motion. Good targets are glow, depth, background warmth, card presence, title emphasis, or other existing visual elements. Avoid waveform/equalizer visuals, musical-note graphics, generic particle systems, strobing, or heavy pulsing.
 - Use local assets for audio and any required runtime/media dependencies when possible.
-- Run `hyperframes check` before render — it is brag's single gate.
+- Run `hyperframes check` before render — it is gif's single gate.
 ```
 
-The brief is the boundary: if a detail belongs to product positioning, copy, tone, source material, or selection of moments, `/brag` should specify it. If a detail belongs to composition implementation, Hyperframes should decide it.
+The brief is the boundary: if a detail belongs to product positioning, copy, tone, source material, or selection of moments, `/gif` should specify it. If a detail belongs to composition implementation, Hyperframes should decide it.
 
 ---
 
-## Audio asset preparation
+## Audio asset preparation (`--video`)
 
 Read [audio.md](audio.md). Copy the planned music into `<output-dir>/composition/assets/music/` before building the composition.
 
@@ -106,17 +117,17 @@ Hyperframes copies any SFX it selects into the same `assets/` tree after choosin
 
 ---
 
-## Voiceover (only when the user explicitly asks)
+## Voiceover (`--video`, and only when the user explicitly asks)
 
 Voiceover is disabled unless the user explicitly requests it, for example
 with `--voice` or "narrate this". Do not offer or enable narration during a
-normal `/brag` run.
+normal `/gif` run.
 
 When voice is disabled, do not write a voiceover script, generate narration,
 transcribe audio, duck music, add a voice track, or merge narration into the
 video. The normal video export must remain entirely voice-agnostic.
 
-When voice is enabled, write the narration lines into `brag-plan.md` under a
+When voice is enabled, write the narration lines into `gif-plan.md` under a
 `## Voiceover script` section, then generate the audio through Kokoro:
 
 ```bash
@@ -139,17 +150,17 @@ Scene durations must flex to match the generated audio — check the WAV duratio
 
 ---
 
-## Audio-reactive extraction (when music is present)
+## Audio-reactive extraction (`--video`, when music is present)
 
-When music is present and the treatment is not `none`, the composition can react to per-frame audio data. **Delegate the extraction to the Hyperframes audio-reactive workflow** — `/brag` does not ship an extraction script and must not hardcode a path to one.
+When music is present and the treatment is not `none`, the composition can react to per-frame audio data. **Delegate the extraction to the Hyperframes audio-reactive workflow** — `/gif` does not ship an extraction script and must not hardcode a path to one.
 
-In the composition step, follow the audio-reactive guidance owned by the `hyperframes-creative` skill (let that skill locate its own files). It owns the data format, the extraction helper (which ships with that skill, not with `/brag`, so don't hardcode a path to it), and the per-frame sampling pattern. Ask Hyperframes to extract the audio data and wire at least one visual element to it.
+In the composition step, follow the audio-reactive guidance owned by the `hyperframes-creative` skill (let that skill locate its own files). It owns the data format, the extraction helper (which ships with that skill, not with `/gif`, so don't hardcode a path to it), and the per-frame sampling pattern. Ask Hyperframes to extract the audio data and wire at least one visual element to it.
 
 If extraction is unavailable (no helper, or ffmpeg missing), note it in the brief and skip audio-reactive — do not block the render.
 
 ---
 
-## Beat sync (when a cue source is available)
+## Beat sync (`--video`, when a cue source is available)
 
 Get a cue source first (see `audio.md` → "Beat and cue sources"): a bundled preset, `analyze_music_cues.py` on any track (needs Python; run via `uv`), or `npx hyperframes beats` (no Python; needs Hyperframes ≥ 0.6.99). The rich sources (preset / `analyze_music_cues.py`) give two arrays; `hyperframes beats` gives one.
 
@@ -182,13 +193,13 @@ If SFX are enabled, also pass `<skill-dir>/assets/sfx/sfx-analysis.md` as select
 
 ## Call Hyperframes
 
-After `<output-dir>/brag-plan.md`, `<output-dir>/composition-brief.md`, and selected audio assets exist:
+After `<output-dir>/gif-plan.md`, `<output-dir>/composition-brief.md`, and selected audio assets exist:
 
-1. Load the Hyperframes domain skills (`hyperframes-core`, `hyperframes-animation`, `hyperframes-creative`, `hyperframes-keyframes`, `hyperframes-cli`) to create or update `<output-dir>/composition/`. /brag is its own workflow — do not enter the `hyperframes` entry-point intent interview or route into its generic promo / launch-video workflow.
-2. Pass Hyperframes the composition brief, the brag plan, and the source files it should reference.
+1. Load the Hyperframes domain skills (`hyperframes-core`, `hyperframes-animation`, `hyperframes-creative`, `hyperframes-keyframes`, `hyperframes-cli`) to create or update `<output-dir>/composition/`. /gif is its own workflow — do not enter the `hyperframes` entry-point intent interview or route into its generic promo / launch-video workflow.
+2. Pass Hyperframes the composition brief, the gif plan, and the source files it should reference.
 3. Let Hyperframes choose the implementation details.
 4. Run Hyperframes check (the single gate before render).
-5. Render to `<output-dir>/brag.mp4`.
+5. Render to `<output-dir>/work/launch.mp4` (the GIF is cut from this file; `--video` promotes a copy to the output root).
 
 Do not manually copy stale composition snippets from this skill into the output. The point of delegating is to benefit from the latest Hyperframes guidance.
 
@@ -200,11 +211,10 @@ Before moving to delivery, verify:
 
 - [ ] `<output-dir>/composition-brief.md` exists.
 - [ ] The brief clearly identifies the exact product moments to show.
-- [ ] The composition uses the current Hyperframes workflow, not a hardcoded `/brag` template.
-- [ ] Music file is copied into `<output-dir>/composition/assets/music/`.
-- [ ] At least one visual element subtly reacts to the music (audio-reactive treatment present), or extraction failure is documented.
-- [ ] At least 1 major tween is beat-locked to a strong cue (a `strongCue`, or the highest-`strength` beat from `hyperframes beats`) within ±0.15s, marked `// beat-locked` (or natural timing was chosen for readability).
-- [ ] Sequential events (cards, stats, list items) snap to consecutive `beats[]` timestamps (±0.10s), marked `// beat-grid` (or natural timing was chosen for readability).
+- [ ] The composition uses the current Hyperframes workflow, not a hardcoded `/gif` template.
+- [ ] With `--video`: music file is copied into `<output-dir>/composition/assets/music/`, at least one visual element reacts subtly to it (or the extraction failure is documented), at least 1 major tween is beat-locked to a strong cue within ±0.15s and marked `// beat-locked`, and sequential events snap to consecutive `beats[]` timestamps (±0.10s, marked `// beat-grid`) — or natural timing was chosen for readability.
 - [ ] The composition shows at least one real UI, copy, or visual element from the project.
-- [ ] Total duration is 15-25 seconds.
+- [ ] The loop window is 6-10 seconds, settles into a readable first frame, and its last beat flows back into that first frame.
+- [ ] No crossfade, and no big soft gradient, inside the loop window.
+- [ ] With `--video`: total film duration is 15-25 seconds.
 - [ ] Hyperframes check passes, or any blocker is documented for the user.
