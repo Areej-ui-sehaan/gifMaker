@@ -13,6 +13,7 @@ Create a short launch-style brag video for [App Name].
 ## Output
 - Composition directory: `<output-dir>/composition/`
 - Rendered video: `<output-dir>/brag.mp4`
+- README GIF (only with `--gif`): `<output-dir>/brag.gif`, cut from that render — see `step-4-deliver.md`
 - Format: [landscape / vertical / square] — [width]x[height]
 - Duration: [15-25 seconds]
 

@@ -84,6 +84,22 @@ Or steer the tone:
 /brag --tone "fake Series A launch from 2016"
 ```
 
+Need something for your README rather than for X? A launch video is the wrong shape there — a README wants a silent loop that autoplays. `--gif` gives you both:
+
+```text
+/brag --gif
+```
+
+You still get `brag.mp4`; you also get `brag.gif`, cut from the render — one beat, 6–10 seconds, ~640px, under a 2MB budget, shrinking itself until it fits. Then paste it in:
+
+```md
+<p align="center">
+  <a href="https://your-project.example" title="Watch the 20-second launch film">
+    <img src="docs/brag.gif" alt="The whole pipeline running on one click" width="640">
+  </a>
+</p>
+```
+
 Voiceover is off by default. Enable it explicitly with:
 
 ```text
@@ -92,11 +108,13 @@ Voiceover is off by default. Enable it explicitly with:
 
 Narration uses Kokoro through Hyperframes when enabled.
 
-You get a `brag-output/` folder with the plan, a composition brief, share copy, and the rendered `brag.mp4`.
+You get a `brag-output/` folder with the plan, a composition brief, share copy, the rendered `brag.mp4` — and, with `--gif`, the `brag.gif` built to sit in a README.
 
 ## How it works
 
 `/brag` owns the story — the product angle, tone, and which moments to show. It hands a focused brief to [Hyperframes](https://hyperframes.heygen.com/), which builds, times, and renders the video.
+
+The GIF isn't a downscaled video: a GIF gets one beat, no sound, 256 colors, and a loop you have to design for. `/brag --gif` plans that window before the render and cuts it out of the final file with `<skill-dir>/scripts/make-gif.mjs` (ffmpeg only; gifsicle, if installed, gets used for an extra lossy pass). On `/brag-slim` the same rules ship as a single ffmpeg line — no scripts, no bundled assets.
 
 ## Requirements
 
@@ -107,7 +125,7 @@ You get a `brag-output/` folder with the plan, a composition brief, share copy, 
 
 ## What's in this repo
 
-- `skills/brag/` — the skill, references, and bundled music + SFX
+- `skills/brag/` — the skill, references, bundled music + SFX, and `scripts/make-gif.mjs` for the README GIF
 - `skills/brag-slim/` — `/brag-slim`, the single-file skill for Claude Opus 5.5
 - `examples/` — fake product sites used as a benchmark suite
 - `docs/` — the launch site (GitHub Pages)

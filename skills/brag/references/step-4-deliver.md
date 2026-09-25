@@ -143,6 +143,77 @@ Taxi for Taxis: the ride-hailing app for ride-hailing assets.
 Available in 12 metros.
 ```
 
+## README GIF (`--gif`)
+
+A GIF is not a small video — it's a different deliverable with different physics: 256 colors, no audio, no seeking, no play button, and it loops forever in a page full of other people's text. `--gif` produces **both**: the `brag.mp4` (the real artifact) and `brag.gif` cut from it for the README. Never deliver only the GIF when the mp4 exists — the mp4 is what gets the link.
+
+Do it after the render and poster steps, so the GIF is cut from the graded final.
+
+### Cut a loop, not a summary
+
+Don't downscale the whole 20 seconds. A README reader gives you one glance, so pick **one** beat — hook plus the single best highlight, or the moment the product actually does its thing — and cut 6–10 seconds of it. Length is the strongest lever on both file size and whether anyone watches to the end.
+
+Pick the window from the storyboard timings: a settled start (no fade-in from black), running to just before the next cut, so the loop point lands on motion rather than on a jump.
+
+### Encode
+
+```bash
+node <skill-dir>/scripts/make-gif.mjs <output-dir>/brag.mp4 \
+  --out <output-dir>/brag.gif \
+  --start <s> --duration 8
+```
+
+It defaults to 640px / 12fps / a 2MB budget and steps the quality down until it fits. Flags worth knowing: `--target-mb` (raise for a repo-committed asset you want bigger), `--width`, `--fps`, `--dry-run` to see the ffmpeg command, `--no-shrink` to force exact settings. It needs ffmpeg only — and uses gifsicle for an extra lossy pass if it's installed.
+
+Budgets, from tightest to legal limit:
+
+| Target | Use |
+|---|---|
+| ≤ 1MB | committed in the repo next to the README — the default ambition |
+| ≤ 2MB | fine for a README, still fast on a bad connection |
+| ≤ 10MB | GitHub's ceiling for images dragged into the editor |
+| > 10MB | not a README asset; link to the video instead |
+
+If the encoder walks the whole ladder and is still over budget, don't ship a blurry 320px GIF — shorten `--duration` or cut a flatter section.
+
+Don't be tempted to skip the palette pass to save bytes: an undithered GIF of photo-heavy footage comes out about half the size and looks twice as broken (posterized darks, mottled gradients, mushy small type). The bytes are the price of the 256 colors being spent well.
+
+### What to change in the edit for GIF
+
+Tell Hyperframes these in the composition brief when `--gif` is set — they cost nothing in the mp4 and save the GIF:
+
+- **Flatten big gradient areas.** A slow dark gradient is the classic GIF banding failure; 256 colors on a subtle ramp makes visible steps. A flat or noise-textured background survives.
+- **Type one step bigger.** The GIF is displayed at 640px where the video was designed at 1920px: anything under ~18px at 640 is texture, not text. Keep the readable-copy law and scale it up.
+- **Hard cuts over crossfades.** A crossfade is 2–3 frames at 12fps, which reads as a rendering artifact, not a transition. Cuts are free; dissolves look broken at low frame rates. (If a dissolve is essential, run it at 15fps.)
+- **Higher contrast than you'd use in video.** GIF's limited palette eats soft grey-on-grey. The WCAG pass in `check` already protects you; don't undo it for the GIF.
+- **Design the loop.** The last frame should flow into the first. The strongest README GIFs end where they began, so the loop reads as intentional rather than as a stutter.
+
+### The GIF's first frame
+
+The mp4 bakes a poster as frame 0 so platform thumbnails get it. A GIF needs the same thing for a different reason: the first frame is what's painted before the animation starts and what's left if the reader's connection stalls. So start the cut on a settled frame of the poster beat — usually the same timestamp you pulled `brag.jpg` at.
+
+### Embed
+
+Put the GIF where the README can find it, next to a link to the full version:
+
+```md
+<p align="center">
+  <a href="<wherever the mp4 lives>" title="Watch the 20-second launch film">
+    <img src="docs/brag.gif" alt="<one sentence describing what happens in the loop>" width="640">
+  </a>
+</p>
+```
+
+- The `alt` describes the motion, not the product ("The README rewriting itself in 4 seconds").
+- `width` matters: the GIF is 640px wide, and without it a full-bleed image can dominate a README.
+- Wrap it in a link to the mp4 or the live site — the GIF has no sound and the video is where the joke lands.
+
+### GIF-mode delivery notes
+
+- `share-copy.txt` is unchanged; a GIF caption is the same job.
+- Tell the user the GIF's size alongside its path — "1.8MB, inside the 2MB README budget" is the number they care about.
+- If they only want the GIF, still render the mp4: it's the source for the GIF, the poster, and the linked full version.
+
 ## Final output structure
 
 After this step, `<output-dir>/` should contain:
@@ -151,6 +222,7 @@ After this step, `<output-dir>/` should contain:
 <output-dir>/
   brag.mp4                — the rendered video
   brag.jpg                — the poster (best frame, for <video poster>)
+  brag.gif                — README loop (only with --gif)
   brag-plan.md            — the plan and storyboard
   composition-brief.md    — the Hyperframes handoff brief
   share-copy.txt          — the share caption
@@ -163,6 +235,7 @@ After this step, `<output-dir>/` should contain:
 
 After everything is done, tell the user:
 - Where the video is (`<output-dir>/brag.mp4`)
+- With `--gif`: where the GIF is and how big it is (`<output-dir>/brag.gif`, e.g. 1.8MB), plus the paste-ready `<img>` line
 - Where the share copy is
 - One sentence on what the video does creatively
 - Optionally: offer to re-roll a scene, change tone, or try a different angle

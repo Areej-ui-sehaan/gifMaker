@@ -47,6 +47,7 @@ landing-page-only, write "none — landing-page only" and rely on Key moments in
 
 ## Format: [landscape / vertical / square] — [width]x[height]
 ## Duration: [target seconds]
+## README GIF: [only with --gif] loop window [start]s–[end]s · settles into [what the last frame flows back into] · target [2]MB
 
 ## Visual identity (from the project)
 - Background: [exact color value]
@@ -118,6 +119,16 @@ Scene durations must sum to 15-25 seconds. Count them.
 - Under 15 seconds: too thin, add a scene or lengthen holds.
 - Over 25 seconds: cut a scene or tighten timing.
 - 18-22 seconds is the sweet spot for most brag videos.
+
+## With `--gif`
+
+The video stays 15-25 seconds; the GIF is a 6-10 second loop cut out of it. Plan the loop while you still have a choice to make, not after the render:
+
+- **Choose the loop window now** — the hook plus the one moment the product actually does its thing. A scene that only works with sound (a music sting, a voiceover beat) can't carry a GIF; pick a scene that reads silently.
+- **Design the return.** End the window on motion that flows into the first frame, so the loop looks intended. If the storyboard ends on an outro card with a hard fade to black, that fade is the loop's worst moment — leave it out of the window.
+- **No dissolves inside the window.** At GIF frame rates a crossfade is 2-3 frames and reads as a glitch. Cuts only.
+- **Keep type big.** The GIF lands at 640px wide, so anything you want read must survive that.
+- **Flatten the backdrop** where the loop spends most of its time — a slow dark gradient bands badly at 256 colors.
 
 ## Reading time (keep the pace, not at text's expense)
 

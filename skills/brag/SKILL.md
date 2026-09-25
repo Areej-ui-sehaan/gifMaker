@@ -1,6 +1,6 @@
 ---
 name: brag
-description: Turn the current project website into a short, polished, shareable launch video using Hyperframes. Use when someone says "/brag", "let's brag about this", "make a launch video", "turn this into a video", or wants to share what they built. Reads the project code directly — no live URL or screenshots needed.
+description: Turn the current project website into a short, polished, shareable launch video using Hyperframes, optionally cut down to a looping GIF for a README. Use when someone says "/brag", "let's brag about this", "make a launch video", "turn this into a video", "make a gif for my README", or wants to share what they built. Reads the project code directly — no live URL or screenshots needed.
 ---
 
 # /brag
@@ -25,6 +25,7 @@ to the normal no-voice workflow.
 3. Scripts and storyboards the video.
 4. Hands a focused composition brief to Hyperframes.
 5. Validates, renders, and writes share copy.
+6. With `--gif`, cuts the strongest 6–10 seconds down to a looping `brag.gif` sized for a project README — alongside the video, never instead of it.
 
 ## Parsing the invocation
 
@@ -34,6 +35,7 @@ The user may invoke with natural language or flags:
 /brag
 /brag --tone chaotic
 /brag --tone polished --format vertical
+/brag --gif                 (video + a looping GIF sized for a README)
 /brag this. Make it feel like a ridiculous startup launch.
 ```
 
@@ -48,6 +50,7 @@ Parse these options:
 | `--no-sfx` | flag | sfx on |
 | `--title` | string | inferred from project |
 | `--voice` | flag | narration off |
+| `--gif` | flag | no GIF |
 
 Voice is opt-in. If `--voice` is present, use Kokoro via Hyperframes and do
 not add any provider-selection logic. The voice workflow is intentionally
@@ -129,7 +132,9 @@ Write the composition brief and use Hyperframes to create the video implementati
 
 Validate, preview, render to `<output-dir>/brag.mp4`, pick the best poster frame into `<output-dir>/brag.jpg`, bake that poster as the video's frame 0 so it's the idle thumbnail everywhere, and write `<output-dir>/share-copy.txt`.
 
-**Gate:** `<output-dir>/brag.mp4` exists. A best-frame poster `<output-dir>/brag.jpg` is picked (not an arbitrary frame) and baked as frame 0 of `brag.mp4`. Share copy is written.
+**With `--gif`:** after the render, cut the planned loop window out of `brag.mp4` into `<output-dir>/brag.gif` with `<skill-dir>/scripts/make-gif.mjs`, aiming for a 2MB budget so it can sit in a README. A GIF is its own medium — no audio, 256 colors, a permanent loop — so it's planned in Step 2 and encoded here, not transcoded as an afterthought. See the README GIF section in `step-4-deliver.md`.
+
+**Gate:** `<output-dir>/brag.mp4` exists. A best-frame poster `<output-dir>/brag.jpg` is picked (not an arbitrary frame) and baked as frame 0 of `brag.mp4`. Share copy is written. With `--gif`: `<output-dir>/brag.gif` exists, is under its size budget, and starts and ends on frames that loop cleanly.
 
 ---
 

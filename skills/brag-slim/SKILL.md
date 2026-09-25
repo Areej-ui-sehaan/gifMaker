@@ -1,6 +1,6 @@
 ---
 name: brag-slim
-description: Turn a project directory or a website URL into a short, shareable launch video with music, motion, and share copy. One file, no bundled assets — built entirely by the model with the tools already on the machine. Use when someone says "/brag-slim", "let's /brag about this", "brag about <url>", "make a launch video", or wants to show off what they built. If the /brag skill is also installed, let /brag handle those phrases; it hands off here on Opus 5.5.
+description: Turn a project directory or a website URL into a short, shareable launch video with music, motion, and share copy, and optionally a looping GIF cut for a project README. One file, no bundled assets — built entirely by the model with the tools already on the machine. Use when someone says "/brag-slim", "let's /brag about this", "brag about <url>", "make a launch video", or wants to show off what they built. If the /brag skill is also installed, let /brag handle those phrases; it hands off here on Opus 5.5.
 ---
 
 # /brag-slim
@@ -16,6 +16,7 @@ Usage: `/brag-slim [input] [options]`. Options (flags or plain language):
 | `--tone <preset or freeform>` | inferred; `default` if nothing clearly fits |
 | `--format landscape\|vertical\|square` | landscape (1920×1080; vertical 1080×1920, square 1080×1080), 30fps |
 | `--duration <s>` | about 20s |
+| `--gif` | no GIF; with it: also a looping README GIF, cut from the render |
 
 Write the deliverables to `brag-output/` in the current directory (timestamped `brag-output-YYYY-MM-DD-HHmmss/` if it already exists). Keep every intermediate file (frames, downloads, scripts, stems) in a `work/` subfolder inside it.
 
@@ -52,7 +53,7 @@ Before planning, answer: What is it (one sentence)? Who is it for, and what does
 
 ## 2. Plan
 
-Write `brag-plan.md`: the angle, the hook, 2–3 highlights, the punchline, tone, visual identity, and a scene-by-scene storyboard with durations that sum to the target.
+Write `brag-plan.md`: the angle, the hook, 2–3 highlights, the punchline, tone, visual identity, and a scene-by-scene storyboard with durations that sum to the target. If `--gif` is set, also name the 6–10 second **loop window** (hook plus the one scene that reads silently) while you can still shape the edit around it.
 
 If the user points at one part — a new version, a new feature, one angle — make this the focus of the video.
 
@@ -98,4 +99,21 @@ Before the full render, look at stills from every scene *and* from mid-transitio
 
 - **Poster:** pull the strongest *settled* frame (text fully in, not mid-transition) to `brag.jpg`, and bake it in as frame 0 of `brag.mp4` so every platform's thumbnail shows it. Replace frame 0 rather than adding a frame, so the duration and audio sync stay the same.
 - **`share-copy.txt`:** 1–3 sentences, postable as-is, specific, matching the tone. No "excited to share."
-- **Tell the user** where the video and copy are, give one sentence on the creative angle, and offer to re-roll a scene or try another tone.
+- **README GIF (`--gif`)** — a GIF is not a small video: 256 colors, no audio, and it loops forever. Cut one **beat** (6–10s), not the whole film, then encode it from `brag.mp4`:
+
+  ```bash
+  ffmpeg -y -ss <start> -t 8 -i brag.mp4 -filter_complex "[0:v]fps=12,scale=640:-2:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256:stats_mode=full[p];[s1][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle[v]" -map "[v]" -loop 0 brag.gif
+  ```
+
+  Two passes in one command: `palettegen` reads the whole trimmed clip and builds the best 256-color palette, `paletteuse` applies it. Skip it and ffmpeg keeps the first 256 colors it happens to see: dark areas posterize, gradients go mottled, and small type turns to mush. The dithering costs bytes — expect roughly double a naive encode — and it is always worth it.
+
+  Land it under 2MB (≤1MB if it's committed next to the README; 10MB is GitHub's ceiling). Over budget: shorten the clip first, then drop to `fps=10` or `scale=560`. For the loop window: start on a settled frame (it's what's painted before the animation rolls), end on motion that flows into that first frame, hard cuts only — a crossfade is 2 frames at 12fps and reads as a glitch — and keep a big dark gradient out of it, since that's what banding ruins. Embed it with the size pinned and the sound one click away:
+
+  ```md
+  <p align="center">
+    <a href="<where the mp4 lives>" title="Watch the full 20s">
+      <img src="docs/brag.gif" alt="<what happens in the loop>" width="640">
+    </a>
+  </p>
+  ```
+- **Tell the user** where the video and copy are (with `--gif`: the GIF path and its size — "1.8MB, inside the 2MB README budget" is the number they want), give one sentence on the creative angle, and offer to re-roll a scene or try another tone.
